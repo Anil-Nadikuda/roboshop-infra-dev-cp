@@ -48,6 +48,24 @@ pipeline {
                 """
             }
         }
+    stage('Destroy') {
+            when {
+                expression {
+                    params.action == 'destroy'      
+                }
+
+            }
+            input {
+                message "Should wecontinue"
+                ok "Yes, we should."
+            }
+            steps {
+                sh """
+                    cd 01-vpc
+                    terraform destroy -auto-approve
+                """
+            }
+        }
         
     }
     // post build
