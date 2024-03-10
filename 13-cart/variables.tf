@@ -20,7 +20,7 @@ variable "environment" {
 }
 
 variable "zone_name" {
-  default = "daws76s.online"
+  default = "daws14.online"
 }
 variable "iam_instance_profile" {
   default = "ShellScriptRoleForRoboshop"

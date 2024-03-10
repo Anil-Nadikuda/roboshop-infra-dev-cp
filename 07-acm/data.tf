@@ -1,3 +1,3 @@
-data "aws_route53_zone" "daws76s" {
-  name         = "daws76s.online"
+data "aws_route53_zone" "daws14" {
+  name         = "daws14.online"
 }
