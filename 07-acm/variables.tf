@@ -20,5 +20,5 @@ variable "environment" {
 }
 
 variable "zone_name" {
-  default = "daws14.online"
+  default = "devaws14.online"
 }
