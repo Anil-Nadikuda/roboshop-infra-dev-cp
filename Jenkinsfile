@@ -52,7 +52,7 @@ pipeline {
         }
         stage('DB ALB') {
             parallel {
-                stage('DB')
+                stage('DB') {
                     steps {
                         sh """
                         cd 04-database
@@ -60,6 +60,7 @@ pipeline {
                         terraform apply -auto-configure
                         """
                     }
+                }
                 stage('ALB') {
                     steps {
                         sh """
