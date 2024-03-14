@@ -68,19 +68,19 @@ pipeline {
                         terraform init -reconfigure
                         terraform apply -auto-approve
                         terraform destroy -auto-approve
-                        cd ..
+                        
                         cd 04-database
                         terraform destroy -auto-approve
-                        cd ..
+                        
                         cd 03-vpn
                         terraform destroy -auto-approve
-                        cd ..
+                        
                         cd 02-sg
                         terraform destroy -auto-approve
-                        cd ..
+                        
                         cd 01-vpn
                         terraform destroy -auto-approve
-                        cd ..
+                        
 
                         """
                     }
