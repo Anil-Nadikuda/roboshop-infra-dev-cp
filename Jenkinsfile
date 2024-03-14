@@ -72,6 +72,24 @@ pipeline {
                 }
             }
         }
+        // destrpyyyy remove 
+        stage('Destroy all') {
+            steps {
+                 sh """
+                 cd 05-app-alb
+                 terraform init -reconfigure
+                 terraform destroy -auto-approve
+                 cd 04-databases
+                 terraform destroy -auto-approve
+                 cd 03-vpn
+                 terraform destroy -auto-approve
+                 cd 02-sg
+                 terraform destroy -auto-approve
+                 cd 01-vpc
+                 terraform destroy -auto-approve
+                 """
+            }
+        }
 
     }
     // post build
