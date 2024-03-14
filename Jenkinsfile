@@ -23,70 +23,96 @@ pipeline {
         // password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
     }
     stages {
-        stage('VPC') {
+        // stage('VPC') {
+        //     steps {
+        //          sh """
+        //          cd 01-vpc
+        //          terraform init -reconfigure
+        //          terraform apply -auto-approve
+        //          """
+        //     }
+        // }
+        // stage('SG') {
+        //     steps {
+        //          sh """
+        //          cd 02-sg
+        //          terraform init -reconfigure
+        //          terraform apply -auto-approve
+        //          """
+        //     }
+        // }
+        // stage('VPN') {
+        //     steps {
+        //          sh """
+        //          cd 03-vpn
+        //          terraform init -reconfigure
+        //          terraform apply -auto-approve
+        //          """
+        //     }
+        // }
+        // stage('DB ALB') {
+        //     parallel {
+        //         stage('DB') {
+        //             steps {
+        //                 sh """
+        //                 cd 04-database
+        //                 terraform init -reconfigure
+        //                 terraform apply -auto-approve
+        //                 """
+        //             }
+        //         }
+        //         stage('ALB') {
+        //             steps {
+        //                 sh """
+        //                 cd 05-app-alb
+        //                 terraform init -reconfigure
+        //                 terraform apply -auto-approve
+        //                 """
+        //             }
+        //         }
+        //     }
+        // }
+        stage('alb destroy') {
             steps {
                  sh """
-                 cd 01-vpc
-                 terraform init -reconfigure
-                 terraform apply -auto-approve
+                 cd 05-app-alb
+                 terraform destroy -auto-approve
                  """
             }
         }
-        stage('SG') {
+        stage('DB destroy') {
             steps {
                  sh """
-                 cd 02-sg
-                 terraform init -reconfigure
-                 terraform apply -auto-approve
+                 cd 04-database
+                 terraform destroy -auto-approve
                  """
             }
         }
-        stage('VPN') {
+        stage('vpn destroy') {
             steps {
                  sh """
                  cd 03-vpn
-                 terraform init -reconfigure
-                 terraform apply -auto-approve
+                 terraform destroy -auto-approve
                  """
             }
         }
-        stage('DB ALB') {
-            parallel {
-                stage('DB') {
-                    steps {
-                        sh """
-                        cd 04-database
-                        terraform init -reconfigure
-                        terraform apply -auto-approve
-                        """
-                    }
-                }
-                stage('ALB') {
-                    steps {
-                        sh """
-                        cd 05-app-alb
-                        terraform init -reconfigure
-                        terraform apply -auto-approve
-                        terraform destroy -auto-approve
-                        
-                        cd 04-database
-                        terraform destroy -auto-approve
-                        
-                        cd 03-vpn
-                        terraform destroy -auto-approve
-                        
-                        cd 02-sg
-                        terraform destroy -auto-approve
-                        
-                        cd 01-vpn
-                        terraform destroy -auto-approve
-                        
-
-                        """
-                    }
-                }
+        stage('sg destroy') {
+            steps {
+                 sh """
+                 cd 02-sg
+                 terraform destroy -auto-approve
+                 """
             }
         }
+        stage('vpc destroy') {
+            steps {
+                 sh """
+                 cd 01-vpc
+                 terraform destroy -auto-approve
+                 """
+            }
+        }
+
     }
     // post build
     post { 
