@@ -72,19 +72,11 @@ pipeline {
         //         }
         //     }
         // }
-        stage('alb destroy') {
-            steps {
-                 sh """
-                 cd 05-app-alb
-                 terraform init -reconfigure
-                 terraform destroy -auto-approve
-                 """
-            }
-        }
+
         stage('DB destroy') {
             steps {
                  sh """
-                 cd 04-database
+                 cd 04-databases
                  terraform init -reconfigure
                  terraform destroy -auto-approve
                  """
