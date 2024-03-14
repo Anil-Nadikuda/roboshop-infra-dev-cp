@@ -4,13 +4,13 @@ pipeline {
             label 'AGENT-1'
         }
     }
-    environment {
-        packageVersion = ''
-        nexusURL = '172.31.83.22:8081'
-    }
+    // environment {
+    //     packageVersion = ''
+    //     nexusURL = '172.31.83.22:8081'
+    // }
     options {
-        timeout(time: 1, unit: 'HOURS')
-        disableConcurrentBuilds()
+        // timeout(time: 1, unit: 'HOURS')
+        // disableConcurrentBuilds()
         ansiColor('xterm')
     }
     parameters {
@@ -28,7 +28,7 @@ pipeline {
                  sh """
                  cd 01-vpc
                  terraform init -reconfigure
-                 terraform apply -auto-configure
+                 terraform apply -auto-approve
                  """
             }
         }
@@ -37,7 +37,7 @@ pipeline {
                  sh """
                  cd 02-sg
                  terraform init -reconfigure
-                 terraform apply -auto-configure
+                 terraform apply -auto-approve
                  """
             }
         }
@@ -46,7 +46,7 @@ pipeline {
                  sh """
                  cd 03-vpn
                  terraform init -reconfigure
-                 terraform apply -auto-configure
+                 terraform apply -auto-approve
                  """
             }
         }
@@ -57,7 +57,7 @@ pipeline {
                         sh """
                         cd 04-database
                         terraform init -reconfigure
-                        terraform apply -auto-configure
+                        terraform apply -auto-approve
                         """
                     }
                 }
@@ -66,7 +66,7 @@ pipeline {
                         sh """
                         cd 05-app-alb
                         terraform init -reconfigure
-                        terraform apply -auto-configure
+                        terraform apply -auto-approve
                         """
                     }
                 }
