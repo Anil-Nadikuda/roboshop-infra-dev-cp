@@ -72,6 +72,7 @@ pipeline {
                 }
             }
         }
+        
         // destrpyyyy remove 
         stage('Destroy all') {
             steps {
@@ -90,8 +91,8 @@ pipeline {
                  """
             }
         }
-
     }
+
     // post build
     post { 
         always { 
