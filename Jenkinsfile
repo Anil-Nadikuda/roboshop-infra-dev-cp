@@ -55,7 +55,7 @@ pipeline {
                 stage('DB') {
                     steps {
                         sh """
-                        cd 04-database
+                        cd 04-databases
                         terraform init -reconfigure
                         terraform apply -auto-approve
                         """
