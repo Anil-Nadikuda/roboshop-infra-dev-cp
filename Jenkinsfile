@@ -61,15 +61,15 @@ pipeline {
                         """
                     }
                 }
-                stage('ALB') {
-                    steps {
-                        sh """
-                        cd 05-app-alb
-                        terraform init -reconfigure
-                        terraform apply -auto-approve
-                        """
-                    }
-                }
+                // stage('ALB') {
+                //     steps {
+                //         sh """
+                //         cd 05-app-alb
+                //         terraform init -reconfigure
+                //         terraform apply -auto-approve
+                //         """
+                //     }
+                // }
             }
         }
         
